@@ -577,7 +577,7 @@ const createProducts = (product) => {
     class="product-img"
     alt=""
   />
-  <div class="border border-2 border-primary p-3">
+  <div class="p-3 bg-light shadow">
     <h6 class="product-title fw-bold text-truncate">${product.title}</h6>
     <p
       class="product-description small text-black-50 border-1 mb-0 user-select-none"
@@ -635,7 +635,7 @@ const categorize = (li, title) => {
 
 const createCategoryItem = (title) => {
   const li = document.createElement("li");
-  li.className = "category-item btn btn-outline-primary me-2 text-capitalize";
+  li.className = "category-item btn btn-outline-primary me-2 text-capitalize mb-3";
   li.innerText = title;
 
   li.addEventListener("click", categorize.bind(null, li, title)); // line 291 function invoked
