@@ -1,0 +1,369 @@
+// ----------- removing 'active' class from previous clicked category if "exists" -----------
+
+// method - 1
+const prevActiveCategory = document.querySelector(".category-item.active");
+console.log(prevActiveCategory);
+if (prevActiveCategory) {
+    prevActiveCategory.classList.remove("active");
+}
+
+
+// method - 2 (**initial active class is required**)
+// category 'all' is default to be active
+if (title === "all") {
+    li.classList.add("active");
+}
+document.querySelector(".category-item.active").classList.remove("active");
+
+// *** if document.querySelector(".category-item.active") === null => doesn't work
+
+
+// method - 3  (**initial active class is not required**)
+// if before ? is object => will work => class 'active' added
+document.querySelector(".category-item.active")?.classList.remove("active");
+
+// *** document.querySelector(".category-item.active")? => object => work / if not object => doesn't work
+// *** document.querySelector(".category-item.active")? => null (object) => doesn't work 
+// ** although null is object => doesn't have 'classList' => doesn't work
+// if before ? is object => will work
+// after ? => (classList) property exist => will work
+// **** before ? must be object / after ? must have property (classList) => to work
+
+
+==========================================================================================================
+
+
+ // filtering products according to category selected
+
+
+ // method - 1 
+  if (title === "all") {
+    productRender(products);
+  } else {
+    productRender (products.filter((el) => el.category === title));
+  }
+
+
+// method - 2
+ productRender (
+    products.filter((el) => title === "all" || el.category === title)
+  );
+
+
+// if  el.category === title   =>   generate selected categories (electronics/jewelry)
+
+// ** products.filter((el) => title === "all")   =>   products.filter((el) => el )  => all products **
+
+
+==========================================================================================================
+
+
+project starts ** (how do we know where project starts from in the code) **
+
+
+// method - 1
+
+function init() {
+  // original categories[] array inserted as argument - dynamic
+  categoryRender(categories);
+
+  // setting category 'all' active as default
+  categoriesList.children[0].classList.add("active");
+
+  // original products[] array inserted as argument - dynamic
+  productRender(products);
+}
+init();
+
+
+// method - 2
+
+(function () {
+  // original categories[] array inserted as argument - dynamic
+  categoryRender(categories);
+
+  // setting category 'all' active as default
+  categoriesList.children[0].classList.add("active");
+
+  // original products[] array inserted as argument - dynamic
+  productRender(products);
+})();
+
+
+==========================================================================================================
+
+
+// --------- Adding to cart (offcanvas) when "Add to Cart" btn is clicked -----------
+
+// method - 1
+
+const addToCart = (id, btn) => {
+  // console.log(id, btn);
+  btn.innerText = "Added";
+  btn.classList.add("active");
+
+  // finding the product added to cart with 'product id'
+  carts.append(createItemInCart(products.find((product) => product.id === id)));
+
+  // Badge Count => To show number of items added in the cart
+  cartCounter();
+
+  // calculating total in cart
+  calculateTotal();
+};
+
+
+// method - 2
+
+const addToCart = (id, btn) => {
+  // if button clicked => remove
+  if (btn.classList.contains("active")) {
+    btn.innerText = "Add to Cart";
+    btn.classList.remove("active");
+  } else {
+    // if button not clicked => add
+    btn.innerText = "Added";
+    btn.classList.add("active");
+
+    // finding the product added to cart with 'product id'
+    carts.append(
+      createItemInCart(products.find((product) => product.id === id))
+    );
+
+    // Badge Count => To show number of items added in the cart
+    cartCounter();
+
+    // calculating total in cart
+    calculateTotal();
+  }
+};
+
+
+=====================================================================================================
+
+
+// ---------------------------- Removing from Cart ---------------------------
+
+// method - 1
+
+const itemInCartDel = itemInCart.querySelector(".item-in-cart-del");
+itemInCartDel.addEventListener(
+  "click",
+  removeFromCart.bind(null, itemInCart)
+);
+
+const removeFromCart = (currentItemInCart) => {
+  Swal.fire({
+    title: "Are you sure to remove ?",
+    text: "This item will be discarded from your cart !",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonColor: "#2a628f",
+    cancelButtonColor: "#d72323",
+    confirmButtonText: "Yes, remove it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // item in cart removed - badgeCount - total
+      currentItemInCart.remove();
+      cartCounter();
+      calculateTotal();
+
+      Swal.fire("Removed !", "Your item has been removed.", "success");
+    }
+  });
+};
+
+
+// method - 2
+
+itemInCart.setAttribute("item-in-cart-id", product.id); // line 312
+
+const itemInCartDel = itemInCart.querySelector(".item-in-cart-del");
+itemInCartDel.addEventListener(
+  "click",
+  removeFromCart.bind(null, product.id)
+);
+
+const removeFromCart = (productId) => {
+  const currentItemInCart = document.querySelector(
+    `[item-in-cart-id = "${productId}"]`
+  );
+  Swal.fire({
+    title: "Are you sure to remove ?",
+    text: "This item will be discarded from your cart !",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonColor: "#2a628f",
+    cancelButtonColor: "#d72323",
+    confirmButtonText: "Yes, remove it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // item in cart removed - badgeCount - total
+      currentItemInCart.remove();
+      cartCounter();
+      calculateTotal();
+      Swal.fire("Removed !", "Your item has been removed.", "success");
+    }
+  });
+};
+
+======================================================================================================
+
+// To remove "active" from selected Add-To-Cart Button
+
+  const currentProductCard = document.querySelector(`[createProduct-id = "${productId}"]`);
+  const currentAddToCartBtn = currentProductCard.querySelector(".add-to-cart-btn");
+
+// Removing 'active' from Add-To-Cart Button
+
+  currentAddToCartBtn.classList.remove("active");
+  currentAddToCartBtn.innerText = "Add to Cart";
+
+=======================================================================================================
+
+// Removing items in cart if add-to-cart button is clicked 
+
+  // method - 1
+
+  currentAddToCartBtn.innerText = "Add to Cart";
+  currentAddToCartBtn.classList.remove("active");
+  currentItemInCart.remove();
+  cartCounter();
+  calculateTotal();
+
+  // method - 2
+
+  removeFromCart(productId) 
+
+======================================================================================================
+
+
+// --------------- Adding and Removing items to cart (offcanvas)  --------------
+
+const handleAddToCart = (productId) => {
+  // To add and remove items into cart only using productId
+  const currentProductCard = document.querySelector(
+    `[createProduct-id = "${productId}"]`
+  );
+  const currentAddToCartBtn =
+    currentProductCard.querySelector(".add-to-cart-btn");
+
+  if (currentAddToCartBtn.classList.contains("active")) {
+    // if button clicked => remove
+    removeFromCart(productId);
+  } else {
+    addToCart(productId);
+  }
+};
+
+
+// -------------------- Adding items to cart (offcanvas)  -----------------------
+
+const addToCart = (productId) => {
+  const currentProductCard = document.querySelector(
+    `[createProduct-id = "${productId}"]`
+  );
+  const currentAddToCartBtn =
+    currentProductCard.querySelector(".add-to-cart-btn");
+
+  // if button not clicked => add
+  currentAddToCartBtn.innerText = "Added";
+  currentAddToCartBtn.classList.add("active");
+
+  // finding the product added to cart with 'product id'
+  carts.append(
+    createItemInCart(products.find((product) => product.id === productId))
+  );
+
+  // Badge Count => To show number of items added in the cart
+  cartCounter();
+
+  // calculating total in cart
+  calculateTotal();
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "bottom-end",
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+
+  Toast.fire({
+    icon: "success",
+    title: "Item Added successfully",
+  });
+};
+
+=====================================================================================================
+
+  if (currentAddToCartBtn.classList.contains("active")) {
+    // if button clicked => remove from cart
+    removeFromCart(productId);
+  } else {
+    // if button not clicked => add to cart
+    addToCart(productId);
+  }
+
+  // Remove from Cart if Add-to-Cart btn is clicked ~ if not, Add to Cart
+  currentAddToCartBtn.classList.contains("active")
+    ? removeFromCart(productId)
+    : addToCart(productId);
+
+======================================================================================================
+
+  itemDecrement.addEventListener("click", () => {
+    if (itemQuantity.valueAsNumber > 1) {
+      itemQuantity.valueAsNumber -= 1;
+      itemInCartCost.innerText = itemQuantity.valueAsNumber * product.price;
+      calculateTotal();
+    }
+  });
+
+    itemDecrement.addEventListener("click", () => {
+    itemQuantity.valueAsNumber > 1 && (itemQuantity.valueAsNumber -= 1);
+    itemInCartCost.innerText = itemQuantity.valueAsNumber * product.price;
+    calculateTotal();
+  });
+
+======================================================================================================
+
+allItemsInCart.forEach((el) => {
+    const item = {
+    productId: el.getAttribute("item-in-cart-id"),
+    quantity: el.querySelector(".item-quantity").valueAsNumber,
+  };
+  items.push(item);
+});
+
+allItemsInCart.forEach((el) => {
+  const item = {};
+  item.productId = el.getAttribute("item-in-cart-id");
+  item.quantity = el.querySelector(".item-quantity").valueAsNumber;
+  items.push(item);
+});
+
+=========================================================================================================
+
+ // detecting items in carts to set the buttons "added" if existed // line 544
+
+  const isInCart = [...document.querySelectorAll("[item-in-cart-id]")].find(
+    (el) => el.getAttribute("item-in-cart-id") == product.id
+  );
+
+// console.log(isInCart ? true : false);
+
+${
+  isInCart
+    ? `<button class="active add-to-cart-btn btn btn-outline-primary w-100 d-block"> Added </button>`
+    : `<button class="add-to-cart-btn btn btn-outline-primary w-100 d-block"> Add to Cart </button>`
+}
+
+==========================================================================================================
+
+
+

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Commerce - Add to Cart</title>
+    <link rel="stylesheet" href="./css/app.css" />
+  </head>
+  <body>
+    <main id="app" class="px-3 cart-feature">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-8 col-md-12 col-lg-10">
+            <div class="d-flex flex-column min-vh-100">
+              <nav
+                class="mb-4 mt-2 pb-2 border-black border-bottom border-3 d-flex justify-content-between align-items-center sticky-top bg-light"
+                id="navBar"
+              >
+                <div class="">
+                  <h3 class="mb-2">Shopify</h3>
+                  <h5 class="text-black-50">E-Commerce</h5>
+                </div>
+                <div class="">
+                  <button class="btn btn-outline-primary" id="search">
+                    <i class="bi bi-search"></i>
+                  </button>
+                  <button
+                    class="btn btn-primary position-relative animate__animated"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#myCart"
+                    id="cartBtn"
+                  >
+                    <i class="bi bi-cart3"></i>
+                    <span
+                      class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary cart-counter-badge"
+                    >
+                      0
+                      <span class="visually-hidden">unread messages</span>
+                    </span>
+                  </button>
+                </div>
+              </nav>
+
+              <!-- Adding categories here -->
+              <div class="">
+                <p class="text-black-50 fw-semibold mb-2">Product Categories</p>
+                <ul
+                  class="categories-list list-unstyled d-flex"
+                  id="categoriesList"
+                ></ul>
+              </div>
+
+              <!-- Adding products here -->
+              <div class="row g-4 mt-3" id="productsList"></div>
+
+              <footer
+                class="bg-primary d-flex justify-content-between align-items-center p-3 mt-4"
+              >
+                <h6 class="text-light">
+                  Copyright &copy; 2023. All Rights Reserved.
+                </h6>
+                <h6 class="text-light">Developed by Okkar Novack</h6>
+
+                <button class="btn btn-sm btn-light">
+                  <a href="#navBar"><i class="bi bi-arrow-90deg-up"></i></a>
+                </button>
+              </footer>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- offcanvas -->
+      <div
+        class="offcanvas offcanvas-end active"
+        tabindex="-1"
+        id="myCart"
+        aria-labelledby="offcanvasExampleLabel"
+        data-bs-backdrop="static"
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+            Order Details
+            <span class="badge bg-secondary ms-1 cart-counter-badge">0</span>
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body">
+          <!-- Adding into cart -->
+          <div class="" id="carts"></div>
+
+          <!-- spacer => to make last item-in-cart visible -->
+          <div class="" style="height: 130px"></div>
+
+          <div class="order-section">
+            <div
+              class="w-100 position-absolute bottom-0 start-0 px-3 py-3 bg-white z-3"
+            >
+              <div
+                class="d-flex justify-content-between align-items-center text-danger my-1 p-2 shadow rounded-3"
+              >
+                <h5 class="">Total</h5>
+                <h5 class="fw-semibold">$ <span id="totalCost">0</span></h5>
+              </div>
+              <button
+                id="order"
+                class="btn btn-warning rounded-pill w-75 d-block mx-auto fw-semibold mt-3 p-2"
+              >
+                Place Order
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="./node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

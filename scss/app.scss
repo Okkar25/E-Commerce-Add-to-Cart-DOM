@@ -1,0 +1,113 @@
+@import "../node_modules/animate.css/animate.min.css";
+
+@import "../node_modules/bootstrap-icons/font/bootstrap-icons.min.css";
+
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap");
+
+// sweet alert 2
+
+$swal2-cancel-button-background-color: white !default;
+$swal2-cancel-button-color: #d72323 !default;
+$swal2-button-padding: 0.625em 1.5em !default;
+
+@import "../node_modules/sweetalert2/src/sweetalert2.scss";
+
+$font-family-sans-serif: "Rubik", sans-serif;
+$primary: #353535;
+$btn-border-radius: 5px;
+$btn-border-width: 2px;
+// $warning: #f46700;
+// $warning: #457b9d;
+// $warning: #277da1;
+// $danger: #f4a261;
+// $danger: #e76f51;
+$danger: #d72323;
+// $warning: #415a77;
+// $warning: #5e548e;
+// $warning: #3d5a80;
+$warning: #2a628f;
+
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+.cart-feature {
+  // nesting
+  .product-item {
+    .product-img {
+      height: 150px;
+      margin-bottom: -50px;
+      margin-left: 1rem;
+      cursor: pointer;
+      //   margin-top: 20px;
+      transition: 300ms;
+    }
+
+    .product-title {
+      margin-top: 50px;
+      // text-truncate with CSS
+      //   width: 300px;
+      //   white-space: nowrap;
+      //   text-overflow: ellipsis;
+      //   overflow: hidden;
+    }
+
+    .product-description {
+      //   height: 120px;
+      height: 8rem;
+    }
+  }
+  //
+
+  .product-item:hover .product-img {
+    rotate: -7deg;
+  }
+
+  .category-item {
+    transition: 300ms;
+  }
+
+  .category-item:active,
+  .category-item.active {
+    // transform: rotate(-10deg) scale(0.95);
+    rotate: -7deg;
+    scale: 0.95;
+  }
+
+  .add-to-cart-btn {
+    transition: 300ms;
+  }
+
+  .add-to-cart-btn:active {
+    scale: 0.9;
+  }
+
+  // offcanvas
+
+  .item-in-cart:hover .item-in-cart-del {
+    transform: translateX(0px);
+  }
+
+  .item-in-cart-img {
+    height: 70px;
+    margin-bottom: -20px;
+  }
+
+  .item-in-cart-control {
+    width: 130px;
+  }
+
+  .item-display {
+    background-color: #f2f7fb;
+  }
+
+  .item-in-cart-del {
+    transform: translateX(40px);
+    transition: 500ms;
+  }
+
+  .item-in-cart-title {
+    width: 280px;
+  }
+  #myCart {
+    z-index: 5000;
+  }
+}
