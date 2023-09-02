@@ -1,1 +1,1 @@
-https://thunderous-speculoos-587070.netlify.app/
+https://ecomerce-add-to-cart-novak.netlify.app/
