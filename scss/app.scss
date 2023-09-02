@@ -26,6 +26,7 @@ $danger: #d72323;
 // $warning: #5e548e;
 // $warning: #3d5a80;
 $warning: #2a628f;
+$success: #f2f7fb;
 
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 
@@ -106,8 +107,5 @@ $warning: #2a628f;
 
   .item-in-cart-title {
     width: 280px;
-  }
-  #myCart {
-    z-index: 5000;
   }
 }
